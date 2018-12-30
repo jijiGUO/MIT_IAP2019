@@ -32,27 +32,22 @@ def my_mesh_dual(mesh, cls=None):
         faces[key] = fkeys
 
     # boundary condition
-    # TODO clean up and make it more general, now only work for 3 valence
     for key in outer:
         fkeys = mesh.vertex_faces(key, ordered=True)
-        # print(fkeys)
-        if len(fkeys) == 3:
+        if len(fkeys) > 1:
             for fkey in fkeys:
                 if fkey not in vertices:
                     vertices[fkey] = fkey_centroid[fkey]
 
             vkeys = reversed(mesh.vertex_neighbors(key, ordered=True))
             for i, v in enumerate(vkeys):
-                if mesh.is_edge_on_boundary(key, v):
-                    # print("True")
+                if mesh.is_edge_on_boundary(key, v) and (
+                        len(fkey_centroid) * (i + 1) + fkey) not in vertices:
                     vertices[len(fkey_centroid) * (i + 1) +
                              fkey] = mesh.edge_midpoint(key, v)
-                    # print(mesh.edge_midpoint(key, v))
                     fkeys.append(len(fkey_centroid) * (i + 1) + fkey)
 
             faces[key] = fkeys
-        else:
-            pass
 
     for key, (x, y, z) in vertices.items():
         dual.add_vertex(key, x=x, y=y, z=z)
