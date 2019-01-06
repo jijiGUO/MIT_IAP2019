@@ -31,7 +31,6 @@ def draw_interface(vertices, faces, maxdev):
     rs.AddObjectsToGroup(srfs, rs.AddGroup())
     # refresh viewport
     rs.EnableRedraw(True)
-    return srfs
 
 
 def callback(k, callback_args=None):

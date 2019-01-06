@@ -1,15 +1,10 @@
-import copy
-
 import rhinoscriptsyntax as rs
 
 from compas.datastructures import Mesh
-
 from compas.geometry import scale_vector
 from compas.geometry import add_vectors
-
 from compas.geometry import planarize_faces
 from compas.geometry import bounding_box
-
 from compas_rhino.utilities import get_line_coordinates
 from compas_rhino.artists.meshartist import MeshArtist
 
@@ -34,6 +29,7 @@ if __name__ == '__main__':
 
     # find z-max and z-min of the tessellation geomerty
     bb = bounding_box(mesh.get_vertices_attributes(('x', 'y', 'z')))
+    print(bb)
     z_max = bb[0][2]
     z_min = bb[4][2]
     z_delta = z_max - z_min

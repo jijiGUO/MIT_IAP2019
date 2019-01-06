@@ -27,7 +27,6 @@ def draw_interface(vertices, faces, maxdev):
     rs.AddObjectsToGroup(srfs, rs.AddGroup())
     # refresh viewport
     rs.EnableRedraw(True)
-    return srfs
 
 
 if __name__ == '__main__':
