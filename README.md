@@ -60,7 +60,7 @@ Philip. F. Yuan
 	- Compas FDM
 * **Presentation 1.0** Individual Design Exercise Explained
 
-### Day 1 01.10 Thu
+### Day 2 01.10 Thu
 
 
 9:00-12:00 [Morning Session]

@@ -65,7 +65,7 @@ if __name__ == '__main__':
             [key_index_a[u], key_index_a[v], key_index_b[v], key_index_b[u]])
 
     # planarize interfaces
-    if 0:
+    if 1:
         planarize_faces(vertices_list, faces_list, kmax=150, callback=callback)
         layer = 'voussoirs_planar'
     else:
