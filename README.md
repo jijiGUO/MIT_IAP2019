@@ -5,8 +5,10 @@
 
 1. Download [Anaconda](https://conda.io/docs/user-guide/install/download.html) and install it. (During installation, check add conda to system path.
 2. Add conda forge ```conda config --add channels conda-forge``` before installing. 
-3. Install Compas ```conda install COMPAS=0.3.5```. 
-4. 
+3. Install Compas ```conda install COMPAS```. 
+4. Install Compas to Rhino ```python -m compas_rhino.install 5.0```.
+5. Install other additional packages. 
+6. Install Grasshopper plugins. 
 
 
 ## Schedule
