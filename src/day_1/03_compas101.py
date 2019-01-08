@@ -1,22 +1,18 @@
 from compas.geometry import Line
 from compas.plotters import Plotter
 
-line = Line([0, 0, 0], [1, 1, 1])
-mid_pt = line.midpoint
-print(mid_pt)
+# create a line
 
-plotter = Plotter(figsize=(10, 6))
+# compute a line midpoint
 
-lines = [{'start': line.start, 'end': line.end, 'width': 1.0}]
-points = [{
-    'pos': line.start,
-    'radius': 0.05,
-    'facecolor': '#ffffff',
-    'text': 'start_point: {}'.format(line.start)
-}]
-points.append({'pos': mid_pt, 'radius': 0.05, 'facecolor': '#ff0000'})
+# create a plotter with figsize=(10, 6)
 
-plotter.draw_lines(lines)
-plotter.draw_points(points)
+# create lines to draw
 
-plotter.show()
+# create start points to draw
+
+# create mid point to draw
+
+# draw lines and points
+
+# plot
