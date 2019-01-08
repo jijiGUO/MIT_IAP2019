@@ -110,6 +110,4 @@ if __name__ == '__main__':
             callback_args=[srf])
 
     artist = MeshArtist(mesh, layer='remeshed')
-    artist.draw_faces(join_faces=True)
-
-    artist.redraw()
+    artist.draw()
