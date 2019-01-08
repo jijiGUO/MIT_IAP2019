@@ -1,82 +1,55 @@
-"""Smooth a mesh on a NURBS surface.
-
-- make a mesh datastructure form a given Rhino mesh
-- define a target surface
-- smooth the mesh
-- use a callback to pull the mesh back onto the surface at every iteration
-- visualize the process with a conduit
-
-author : Tom Van Mele, Matthias Rippmann
-email  : van.mele@arch.ethz.ch
-
-"""
-from __future__ import print_function
+import compas
 
 from compas.datastructures import Mesh
-from compas.geometry import smooth_area
+from compas.geometry import smooth_centroid
 
-import compas_rhino
+from compas.plotters import Plotter
 
-from compas_rhino.helpers import mesh_from_guid
+mesh = Mesh.from_obj(compas.get('faces.obj'))
 
-from compas_rhino.conduits import LinesConduit
-from compas_rhino.geometry import RhinoSurface
-from compas_rhino.artists import MeshArtist
+fixed = [key for key in mesh.vertices() if mesh.vertex_degree(key) == 2]
 
-# make a mesh datastructure from a Rhino mesh object
-# and select a target surface
+points = []
+for key in mesh.vertices():
+    points.append({
+        'pos':
+        mesh.vertex_coordinates(key),
+        'radius':
+        0.1,
+        'facecolor':
+        '#ff0000' if mesh.vertex_degree(key) == 2 else '#ffffff'
+    })
 
-guid = compas_rhino.select_mesh()
-mesh = mesh_from_guid(Mesh, guid)
+lines = []
+for u, v in mesh.edges():
+    lines.append({
+        'start': mesh.vertex_coordinates(u),
+        'end': mesh.vertex_coordinates(v),
+        'width': 1.0
+    })
 
-guid = compas_rhino.select_surface()
-surf = RhinoSurface(guid)
+plotter = Plotter(figsize=(10, 6))
 
-# extract the input for the smoothing algorithm from the mesh
-# and identify the boundary as fixed
-
-vertices = mesh.get_vertices_attributes('xyz')
-faces = [mesh.face_vertices(fkey) for fkey in mesh.faces()]
-adjacency = [mesh.vertex_faces(key, ordered=True) for key in mesh.vertices()]
-fixed = set(mesh.vertices_on_boundary())
-
-# make a conduit for visualization
-# and a callback for updating the conduit
-# and for pulling the free vertices back to the surface
-# at every iteration
-
-edges = list(mesh.edges())
-lines = [[vertices[u], vertices[v]] for u, v in edges]
-
-conduit = LinesConduit(lines, refreshrate=5)
+pcoll = plotter.draw_points(points)
+lcoll = plotter.draw_lines(lines)
 
 
 def callback(k, args):
-    for index in range(len(vertices)):
-        if index in fixed:
-            continue
-        x, y, z = surf.closest_point(vertices[index])
-        vertices[index][0] = x
-        vertices[index][1] = y
-        vertices[index][2] = z
+    plotter.update_pointcollection(pcoll, vertices, 0.1)
 
-    conduit.lines = [[vertices[u], vertices[v]] for u, v in edges]
-    conduit.redraw(k)
+    segments = []
+    for u, v in mesh.edges():
+        a = vertices[u][0:2]
+        b = vertices[v][0:2]
+        segments.append([a, b])
+
+    plotter.update_linecollection(lcoll, segments)
+    plotter.update(pause=0.001)
 
 
-# with the conduit enabled
-# run the smoothing algorithm
-# update the mesh when smoothing is done
-# and draw the result
+vertices = [mesh.vertex_coordinates(key) for key in mesh.vertices()]
+adjacency = [mesh.vertex_neighbors(key) for key in mesh.vertices()]
 
-with conduit.enabled():
-    smooth_area(
-        vertices, faces, adjacency, fixed=fixed, kmax=100, callback=callback)
+smooth_centroid(vertices, adjacency, fixed=fixed, kmax=100, callback=callback)
 
-for key, attr in mesh.vertices(True):
-    attr['x'] = vertices[key][0]
-    attr['y'] = vertices[key][1]
-    attr['z'] = vertices[key][2]
-
-artist = MeshArtist(mesh, layer='mesh-out')
-artist.draw_faces(join_faces=True)
+plotter.show()
