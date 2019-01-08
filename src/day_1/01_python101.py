@@ -155,3 +155,20 @@ def pass_all_the_args(*args, **kwargs):
     all_the_args(*args, **kwargs)
     print(varargs(*args))
     print(keyword_args(**kwargs))
+
+
+# call back function
+print('\n==========callback===========')
+
+
+def callback(sum):
+    print("Sum = {}".format(sum))
+
+
+def add_with_callback(a, b, callback=None):
+    print("adding {} + {}".format(a, b))
+    if callback:
+        callback(a + b)
+
+
+add_with_callback(1, 2, callback)

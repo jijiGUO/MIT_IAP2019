@@ -3,7 +3,7 @@
 
 ## Installation
 
-1. Download [Anaconda](https://conda.io/docs/user-guide/install/download.html) and install it. (During installation, check add conda to system path.
+1. Download [Anaconda](https://conda.io/docs/user-guide/install/download.html) and install it. (During installation, check add conda to system path.)
 2. Add conda forge ```conda config --add channels conda-forge``` before installing. 
 3. Install Compas ```conda install COMPAS```. 
 4. Install Compas to Rhino ```python -m compas_rhino.install 5.0```.
