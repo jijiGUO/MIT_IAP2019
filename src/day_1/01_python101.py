@@ -155,7 +155,3 @@ def pass_all_the_args(*args, **kwargs):
     all_the_args(*args, **kwargs)
     print(varargs(*args))
     print(keyword_args(**kwargs))
-
-
-# class
-print('\n==========class===========')
