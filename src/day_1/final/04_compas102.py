@@ -47,8 +47,8 @@ def callback(k, args):
 
     segments = []
     for u, v in mesh.edges():
-        a = vertices[u][0:2]
-        b = vertices[v][0:2]
+        a = vertices[u]
+        b = vertices[v]
         segments.append([a, b])
 
     # update lines

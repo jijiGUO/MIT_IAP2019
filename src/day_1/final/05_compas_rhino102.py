@@ -23,14 +23,21 @@ conduit = LinesConduit(lines, refreshrate=1)
 # a callback function that update line position
 def callback(k, args):
 
+    # update points
+    for key, attr in mesh.vertices(True):
+        attr['x'] = vertices[key][0]
+        attr['y'] = vertices[key][1]
+        attr['z'] = vertices[key][2]
+
     segments = []
     for u, v in mesh.edges():
-        a = vertices[u][0:3]
-        b = vertices[v][0:3]
+        a = vertices[u]
+        b = vertices[v]
         segments.append([a, b])
 
     # update lines
     conduit.lines = segments
+
     conduit.redraw(k)
 
 
@@ -42,11 +49,6 @@ with conduit.enabled():
     # smoothing function
     smooth_centroid(
         vertices, adjacency, fixed=fixed, kmax=100, callback=callback)
-
-for key, attr in mesh.vertices(True):
-    attr['x'] = vertices[key][0]
-    attr['y'] = vertices[key][1]
-    attr['z'] = vertices[key][2]
 
 # create mesh artist in for compas rhino
 artist = MeshArtist(mesh, layer='mesh-out')
