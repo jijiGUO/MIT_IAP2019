@@ -3,6 +3,8 @@
 
 ## Installation
 
+0. Download Source Code Editor:
+	- Visual Studio Code
 1. Download [Anaconda](https://conda.io/docs/user-guide/install/download.html) and install it. (During installation, check add conda to system path.)
 2. Add conda forge ```conda config --add channels conda-forge``` before installing. 
 3. Install Compas ```conda install COMPAS```. 
@@ -11,7 +13,7 @@
 	- compas_tna
 	- compas_pattern
 	- compas_ghc
-	* update Ironpython and system paths
+	( update Ironpython and system paths )
 6. Install Grasshopper Plugins. 
 
 
