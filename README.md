@@ -15,6 +15,8 @@
 	- compas_ghc
 	( update Ironpython and system paths )
 6. Install Grasshopper Plugins. 
+	- [PhysX.GH](https://github.com/TheAsianCoders/PhysX.GH) 
+	- [Leopard](https://www.food4rhino.com/app/leopard)
 
 
 ## Schedule
