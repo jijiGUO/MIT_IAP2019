@@ -7,8 +7,12 @@
 2. Add conda forge ```conda config --add channels conda-forge``` before installing. 
 3. Install Compas ```conda install COMPAS```. 
 4. Install Compas to Rhino ```python -m compas_rhino.install 5.0```.
-5. Install other additional packages. 
-6. Install Grasshopper plugins. 
+5. Install Additional Compas packages. 
+	- compas_tna
+	- compas_pattern
+	- compas_ghc
+	*update Ironpython and system paths
+6. Install Grasshopper Plugins. 
 
 
 ## Schedule
