@@ -11,7 +11,7 @@
 	- compas_tna
 	- compas_pattern
 	- compas_ghc
-	*update Ironpython and system paths
+	* update Ironpython and system paths
 6. Install Grasshopper Plugins. 
 
 
